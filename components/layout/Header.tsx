@@ -31,7 +31,9 @@ export function Header() {
         height: "calc(4rem + env(safe-area-inset-top, 0px))",
       }}
     >
-      <h1 className="text-xl font-medium text-zinc-900 dark:text-zinc-100">{pageTitle}</h1>
+      <h1 className="ml-14 text-xl font-medium text-zinc-900 dark:text-zinc-100 lg:ml-0">
+        {pageTitle}
+      </h1>
 
       <div className="mx-4 hidden max-w-md flex-1 md:block">
         <div className="relative">
