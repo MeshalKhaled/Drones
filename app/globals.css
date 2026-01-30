@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mapbox GL CSS - must be imported globally */
+@import "mapbox-gl/dist/mapbox-gl.css";
+
+@layer base {
+  :root {
+    /* Dark theme as default to match Skydio-like dashboard */
+    /* Background & Surface Colors */
+    --background: 240 10% 3.9%; /* Near black - main background */
+    --surface: 240 10% 5%; /* Slightly lighter for cards */
+    --foreground: 0 0% 98%; /* Primary text */
+
+    /* Primary Colors */
+    --primary: 217 91% 60%; /* Blue - #60a5fa */
+    --primary-foreground: 0 0% 98%;
+
+    /* Secondary Colors */
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    /* Muted Colors */
+    --muted: 240 3.7% 10%;
+    --muted-foreground: 240 5% 64.9%;
+
+    /* Accent Colors */
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    /* Border & Input */
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 217 91% 60%; /* Focus ring matches primary */
+
+    /* Card Colors */
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    /* Status Colors */
+    --status-online: 142 76% 36%; /* Green - #4ade80 */
+    --status-in-mission: 217 91% 60%; /* Blue - #60a5fa */
+    --status-charging: 43 96% 56%; /* Amber - #fbbf24 */
+    --status-offline: 0 84% 60%; /* Red - #f87171 */
+    --status-success: 142 76% 36%; /* Green */
+    --status-error: 0 84% 60%; /* Red */
+    --status-warning: 43 96% 56%; /* Amber */
+
+    /* Border Radius */
+    --radius: 0.5rem;
+  }
+
+  /* Light theme */
+  .light {
+    --background: 0 0% 100%;
+    --surface: 0 0% 98%;
+    --foreground: 240 10% 3.9%;
+
+    --primary: 217 91% 50%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 217 91% 50%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    /* Status colors remain vibrant in light mode */
+    --status-online: 142 71% 45%;
+    --status-in-mission: 217 91% 50%;
+    --status-charging: 38 92% 50%;
+    --status-offline: 0 72% 51%;
+    --status-success: 142 71% 45%;
+    --status-error: 0 72% 51%;
+    --status-warning: 38 92% 50%;
+  }
+
+  /* Dark theme (explicit) */
+  .dark {
+    --background: 240 10% 3.9%;
+    --surface: 240 10% 5%;
+    --foreground: 0 0% 98%;
+
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 10%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 217 91% 60%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --status-online: 142 76% 36%;
+    --status-in-mission: 217 91% 60%;
+    --status-charging: 43 96% 56%;
+    --status-offline: 0 84% 60%;
+    --status-success: 142 76% 36%;
+    --status-error: 0 84% 60%;
+    --status-warning: 43 96% 56%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+    /* Safe area support for mobile */
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+}
+
+/* Enhanced focus for buttons */
+button:focus-visible,
+[role="button"]:focus-visible {
+  @apply ring-offset-background;
+}
+
+/* Skip to content link for keyboard navigation */
+.skip-link {
+  @apply absolute left-[-9999px] top-2 z-50 rounded-md bg-primary px-4 py-2 text-primary-foreground;
+}
+
+.skip-link:focus {
+  @apply left-2;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Interactive element transitions */
+button,
+a,
+[role="button"] {
+  @apply transition-all duration-150;
+}
+
+/* Active state feedback */
+button:active:not(:disabled),
+[role="button"]:active:not(:disabled) {
+  @apply scale-[0.98];
+}
+
+/* Hover state improvements */
+@media (hover: hover) {
+  button:hover:not(:disabled),
+  [role="button"]:hover:not(:disabled) {
+    @apply brightness-110;
+  }
+}
+
+/* Skeleton animation */
+@keyframes skeleton {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.skeleton {
+  @apply animate-pulse bg-muted;
+  animation: skeleton 1.5s ease-in-out infinite;
+}
