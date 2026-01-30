@@ -293,7 +293,7 @@ export function MissionPlannerClient({ mapboxToken, availableDrones }: MissionPl
   return (
     <div className="flex h-full flex-col gap-4 lg:flex-row">
       {/* Map Section */}
-      <div className="relative min-h-[400px] flex-1 lg:min-h-0">
+      <div className="relative h-[50vh] min-h-[400px] flex-1 lg:h-auto lg:min-h-0">
         <DynamicMissionMapCanvas
           mapboxToken={mapboxToken}
           waypoints={waypoints}

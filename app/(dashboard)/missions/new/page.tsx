@@ -52,7 +52,7 @@ export default function NewMissionPage() {
           Plan a new mission by adding waypoints on the map
         </p>
       </div>
-      <div className="min-h-0 flex-1">
+      <div className="min-h-0 flex-1 overflow-hidden">
         <Suspense fallback={<MissionPlannerLoading />}>
           <MissionPlannerClient mapboxToken={mapboxToken} availableDrones={availableDrones} />
         </Suspense>
